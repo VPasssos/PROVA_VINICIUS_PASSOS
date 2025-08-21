@@ -44,6 +44,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<?php include 'menu.php'; ?>
     <h2>Excluir Usuario</h2>
 
     <?php if (!empty($usuarios)):?>

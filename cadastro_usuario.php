@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<?php include 'menu.php'; ?>   
     <h2>Cadastro Usuário</h2>
 
 

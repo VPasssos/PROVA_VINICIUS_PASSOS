@@ -40,51 +40,59 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Usuário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<?php include 'menu.php'; ?>   
     <h2>Lista de Usuarios</h2>
     <!-- FORMULARIO PARA BUSCAR USUARIO  -->
     <form action="buscar_usuario.php" method="POST">
 
-    <label for="busca">Digiete o ID ou NOME (opcional)</label>
+    <label for="busca">Digiete o ID ou NOME  (opcional)</label>
     <input type="text" name="busca" id="busca">
     <button type="submit">Pesquisar</button>
 
     </form>
-
+    <div class = "table_buscar">
     <?php if(!empty($usuarios)):?>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Ações</th>
-            </tr>
-            
-            <?php foreach($usuarios as $usuario):?>
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <td><?=htmlspecialchars($usuario['id_usuario'])?></td>
-                    <td><?=htmlspecialchars($usuario['nome'])?></td>
-                    <td><?=htmlspecialchars($usuario['email'])?></td>
-                    <td><?=htmlspecialchars($usuario['id_perfil'])?></td>
-                    <td>
-                        <a href="alterar_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>">Alterar</a>
-                        <a href="excluir_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>"onclick="return confirm('Tem certeza que deseja excluir esse usuario')">Excluir</a>
-                    </td>
-                    
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Perfil</th>
+                    <th scope="col">Ações</th>
                 </tr>
-                <?php endforeach; ?>
-        </table>
-    <?php else:?>
-        <p>Nenhum usuario encontrado</p>
-    <?php endif; ?>
-
+            </thead>
+            <tbody>
+                <?php foreach($usuarios as $usuario):?>
+                    <tr>
+                        <td><?=htmlspecialchars($usuario['id_usuario'])?></td>
+                        <td><?=htmlspecialchars($usuario['nome'])?></td>
+                        <td><?=htmlspecialchars($usuario['email'])?></td>
+                        <td><?=htmlspecialchars($usuario['id_perfil'])?></td>
+                        <td>
+                            <a href="alterar_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>">Alterar</a>
+                            <a href="excluir_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>"onclick="return confirm('Tem certeza que deseja excluir esse usuario')">Excluir</a>
+                        </td>
+                        
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php else:?>
+                <p>Nenhum usuario encontrado</p>
+                <?php endif; ?>
+    </div>
+                
     <a href="principal.php">Voltar</a>
 </body>
 </html>

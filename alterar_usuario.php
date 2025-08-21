@@ -53,6 +53,7 @@
     <script src="scripts.js"></script>
 </head>
 <body>
+<?php include 'menu.php'; ?>
     <h2>Alterar Usuario</h2>
 
     <form action="alterar_usuario.php" method="POST">
