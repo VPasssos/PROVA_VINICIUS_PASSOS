@@ -51,7 +51,7 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
     <!-- FORMULARIO PARA BUSCAR USUARIO  -->
     <form action="buscar_usuario.php" method="POST">
 
-    <label for="busca">Digiete o ID ou NOME(opcional)</label>
+    <label for="busca">Digiete o ID ou NOME (opcional)</label>
     <input type="text" name="busca" id="busca">
     <button type="submit">Pesquisar</button>
 
