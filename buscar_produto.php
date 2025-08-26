@@ -8,34 +8,34 @@ if($_SESSION['perfil'] != 1 && $_SESSION['perfil'] !=2){
     exit();
 }
 // INCIALIZA A VARIAVEL PARA EVITAR ERROS 
-$usuarios = [];
+$produtos = [];
 
-// SE O FORMULARIO FOR ENCIADO, BISCA O USUARIO PELO ID OU NOME
+// SE O FORMULARIO FOR ENCIADO, BISCA O PRODUTO PELO ID OU NOME
 if($_SERVER["REQUEST_METHOD"]=="POST" && !empty($_POST['busca'])){
 
     $busca = trim($_POST['busca']);
     // VERIFICA SE A BUSCA É UM (id) OU UM NOME
     if(is_numeric($busca)){
 
-        $sql = "SELECT * FROM usuario WHERE id_usuario = :busca ORDER BY nome ASC";
+        $sql = "SELECT * FROM produto WHERE id_produto = :busca ORDER BY nome_prod ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":busca", $busca, PDO::PARAM_INT);
 
     } else {
 
-        $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome ORDER BY nome ASC";
+        $sql = "SELECT * FROM produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
         $stmt = $pdo -> prepare($sql);
         $stmt -> bindValue(":busca_nome","$busca%", PDO::PARAM_STR);
 
     }
 
 }else{
-    $sql = "SELECT * FROM usuario ORDER BY nome ASC";
+    $sql = "SELECT * FROM produto ORDER BY nome_prod ASC";
     $stmt = $pdo -> prepare($sql);
 }
 
 $stmt->execute();
-$usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
+$produtos = $stmt->fetchALL(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Usuário</title>
+    <title>Buscar Produto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
@@ -52,8 +52,8 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
 <body>
 <?php include 'menu.php'; ?>   
     <h2>Lista de Usuarios</h2>
-    <!-- FORMULARIO PARA BUSCAR USUARIO  -->
-    <form action="buscar_usuario.php" method="POST">
+    <!-- FORMULARIO PARA BUSCAR PRODUTO  -->
+    <form action="buscar_produto.php" method="POST">
 
     <label for="busca">Digiete o ID ou NOME  (opcional)</label>
     <input type="text" name="busca" id="busca">
@@ -61,27 +61,28 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
 
     </form>
     <div class = "table_buscar">
-    <?php if(!empty($usuarios)):?>
+    <?php if(!empty($produtos)):?>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Perfil</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Descricao</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor Unitario</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($usuarios as $usuario):?>
+                <?php foreach($produtos as $produto):?>
                     <tr>
-                        <td><?=htmlspecialchars($usuario['id_usuario'])?></td>
-                        <td><?=htmlspecialchars($usuario['nome'])?></td>
-                        <td><?=htmlspecialchars($usuario['email'])?></td>
-                        <td><?=htmlspecialchars($usuario['id_perfil'])?></td>
+                        <td><?=htmlspecialchars($produto['id_produto'])?></td>
+                        <td><?=htmlspecialchars($produto['nome_prod'])?></td>
+                        <td><?=htmlspecialchars($produto['descricao'])?></td>
+                        <td><?=htmlspecialchars($produto['qtde'])?></td>
+                        <td><?=htmlspecialchars($produto['valor_unit'])?></td>
                         <td>
-                            <a href="alterar_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>">Alterar</a>
-                            <a href="excluir_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>"onclick="return confirm('Tem certeza que deseja excluir esse usuario')">Excluir</a>
+                            <a href="alterar_produto.php?id=<?=htmlspecialchars($produto['id_produto'])?>">Alterar</a>
+                            <a href="excluir_produto.php?id=<?=htmlspecialchars($produto['id_produto'])?>"onclick="return confirm('Tem certeza que deseja excluir esse produto')">Excluir</a>
                         </td>
                         
                     </tr>
@@ -89,7 +90,7 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
             <?php else:?>
-                <p>Nenhum usuario encontrado</p>
+                <p>Nenhum produto encontrado</p>
                 <?php endif; ?>
     </div>
                 

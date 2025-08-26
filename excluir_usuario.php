@@ -41,22 +41,26 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <?php include 'menu.php'; ?>
     <h2>Excluir Usuario</h2>
 
-    <?php if (!empty($usuarios)):?>
-        <table>
+    <?php if(!empty($usuarios)):?>
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Ações</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Perfil</th>
+                <th scope="col">Ações</th>
             </tr>
-            
+        </thead>
+        <tbody>
             <?php foreach($usuarios as $usuario):?>
                 <tr>
                     <td><?=htmlspecialchars($usuario['id_usuario'])?></td>
@@ -68,11 +72,12 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
                     </td>
                     
                 </tr>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </tbody>
         </table>
-    <?php else: ?>
-        <p>Nenhum usuario encontrado</p>
-    <?php endif; ?>
-    <a href="principal.php">Voltar</a>
+        <?php else:?>
+            <p>Nenhum usuario encontrado</p>
+            <?php endif; ?>
+
 </body>
 </html>
