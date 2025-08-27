@@ -46,9 +46,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Produto</title>
-
-
     <link rel="stylesheet" href="styles.css">
+    <script src="mascara.js"></script>
 </head>
 <body>
 <?php include 'menu.php'; ?>   
@@ -57,7 +56,7 @@
 
     <form action="cadastro_produto.php" method="POST">
         <label for="nome_prod">Nome:</label>
-        <input type="text" name="nome_prod" id="nome_prod" required>
+        <input type="text" name="nome_prod" id="nome_prod" required onkeypress="mascara(this, nome_prod)">
 
 
         <label for="descricao">Descrição:</label>
@@ -65,10 +64,10 @@
 
 
         <label for="qtde">Quantidade:</label>
-        <input type="text" name="qtde" id="qtde" required>
+        <input type="text" name="qtde" id="qtde" required onkeypress="mascara(this, qtde)">
       
         <label for="valor_unit">Valor Unitario:</label>
-        <input type="text" name="valor_unit" id="valor_unit" required>
+        <input type="text" name="valor_unit" id="valor_unit" required onkeypress="mascara(this, valor_unit)">
 
         <button type="submit">Cadastrar</button>
         <button type="reset">Cancelar</button>
@@ -76,7 +75,7 @@
 
 
 
-<script src="validacoes.js"></script>
+
 </body>
 </html>
 

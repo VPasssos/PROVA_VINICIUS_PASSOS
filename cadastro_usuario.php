@@ -46,8 +46,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Usuário</title>
-
-
+    
+    <script src="mascara.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -57,11 +57,11 @@
 
     <form action="cadastro_usuario.php" method="POST">
         <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" required>
+        <input type="text" name="nome" id="nome" required onkeypress="mascara(this, nome)">
 
 
         <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" id="email" required >
 
 
         <label for="senha">Senha:</label>

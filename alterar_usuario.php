@@ -50,6 +50,7 @@
     <title>Alterar Usuario</title>
     <link rel="stylesheet" href="styles.css">
     <!-- CERTIFIQUE QUE O JAVASCRIPT ESTA CARREGADO CORRETAMENTE -->
+    <script src="mascara.js"></script>
     <script src="scripts.js"></script>
 </head>
 <body>
@@ -71,7 +72,7 @@
 
     <?php if ($usuario): ?>
         <form action="processa_alteracao_usuario.php" method="POST">
-            <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuario['id_usuario'])?>">
+            <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuario['id_usuario'])?>" onkeypress="mascara(this, nome)">
 
             <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($usuario['id_usuario'])?>">
             

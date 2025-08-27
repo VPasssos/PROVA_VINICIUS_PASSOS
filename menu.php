@@ -63,7 +63,10 @@ $opcoes_menu = $permissoes[$id_perfil];
                         </ul>
                 </li>
             <?php endforeach;?>
-            <div class="vazio"></div>
-            <li class="btlogout"><a href="logout.php">logout</a></li>
+            <div class="btlogout">
+                
+                <li><a href="logout.php">logout</a></li>
+
+            </div>
         </ul>
     </nav>
